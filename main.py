@@ -17,13 +17,13 @@ class LetterEditor(ctk.CTk):
         self.theme_chooser.set(ctk.get_appearance_mode())
         self.theme_chooser.pack(side="left", padx=5, pady=5)
 
-        self.save_button = ctk.CTkButton(self.top_bar, text="Save", command=self.save_button_func)
+        self.save_button = ctk.CTkButton(self.top_bar, text="Save", width=100, command=self.save_button_func)
         self.save_button.pack(side="right", padx=5, pady=5)
 
-        self.close_button = ctk.CTkButton(self.top_bar, text="Close", command=self.close_button_func)
+        self.close_button = ctk.CTkButton(self.top_bar, text="Close", width=100, command=self.close_button_func)
         self.close_button.pack(side="right", padx=5, pady=5)
 
-        self.open_button = ctk.CTkButton(self.top_bar, text="Open", command=self.open_button_func)
+        self.open_button = ctk.CTkButton(self.top_bar, text="Open", width=100, command=self.open_button_func)
         self.open_button.pack(side="right", padx=5, pady=5)
 
         self.file_label = ctk.CTkLabel(self.top_bar)
@@ -37,7 +37,7 @@ class LetterEditor(ctk.CTk):
         if len(sys.argv) > 1:
             self.path = Path(sys.argv[1])
             if self.path and self.path.exists():
-                self.textbox.insert("0.0", self.path.read_text())
+                self.textbox.insert("1.0", self.path.read_text())
                 self.file_label.configure(text=self.path.name)
             else:
                 self.path = None
@@ -50,23 +50,25 @@ class LetterEditor(ctk.CTk):
         path = filedialog.askopenfilename(filetypes=[("Letter File", "*.txt"), ("All Files", "*.*")])
         if path:
             self.path = Path(path)
-            self.textbox.delete("0.0", "end")
-            self.textbox.insert("0.0", self.path.read_text())
+            self.textbox.delete("1.0", "end")
+            self.textbox.insert("1.0", self.path.read_text())
             self.file_label.configure(text=self.path.name)
 
     def save_button_func(self, event=None):
         if self.path:
-            self.path.write_text(self.textbox.get("0.0", "end"))
+            self.path.write_text(self.textbox.get("1.0", "end"))
+            self.file_label.configure(text=self.path.name + " ✔")
+            self.after(1000, lambda: self.file_label.configure(text=self.path.name))
         else:
             name = ctk.CTkInputDialog(title="save", text="Enter file name").get_input()
             if name:
                 file = filedialog.asksaveasfile(mode="w", initialfile=name, defaultextension=".txt", filetypes=[("Text File", "*.txt"), ("All Files", "*.*")])
                 if file:
-                    file.write(self.textbox.get("0.0", "end"))
+                    file.write(self.textbox.get("1.0", "end"))
                     file.close()
 
     def close_button_func(self):
-        self.textbox.delete("0.0", "end")
+        self.textbox.delete("1.0", "end")
         self.path = None
         self.file_label.configure(text="")
 
