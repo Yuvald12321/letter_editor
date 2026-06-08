@@ -1,7 +1,8 @@
-import customtkinter as ctk
-from tkinter import filedialog
-from pathlib import Path
 import sys
+from pathlib import Path
+from tkinter import filedialog
+import customtkinter as ctk
+
 
 class LetterEditor(ctk.CTk):
     def __init__(self):
@@ -9,7 +10,7 @@ class LetterEditor(ctk.CTk):
         self.title("Letter Editor")
         self.geometry("800x500")
 
-        self.bind("<Control-s>",   self.save_button_func)
+        self.bind("<Control-s>", self.save_button_func)
 
         self.top_bar = ctk.CTkFrame(self)
 
@@ -29,7 +30,7 @@ class LetterEditor(ctk.CTk):
         self.file_label = ctk.CTkLabel(self.top_bar)
         self.file_label.pack(padx=5, pady=5)
 
-        self.top_bar.pack(fill="x",padx=10, pady=(10, 0))
+        self.top_bar.pack(fill="x", padx=10, pady=(10, 0))
 
         self.textbox = ctk.CTkTextbox(self)
         self.textbox.pack(fill="both", expand=True, padx=10, pady=10)
@@ -60,7 +61,8 @@ class LetterEditor(ctk.CTk):
             self.file_label.configure(text=self.path.name + " ✔")
             self.after(1000, lambda: self.file_label.configure(text=self.path.name))
         else:
-            name = ctk.CTkInputDialog(title="save", text="Enter file name").get_input()
+            name = ctk.CTkInputDialog(title="Save", text="Enter file name").get_input()
+
             if name:
                 file = filedialog.asksaveasfile(mode="w", initialfile=name, defaultextension=".txt", filetypes=[("Text File", "*.txt"), ("All Files", "*.*")])
                 if file:
@@ -71,6 +73,7 @@ class LetterEditor(ctk.CTk):
         self.textbox.delete("1.0", "end")
         self.path = None
         self.file_label.configure(text="")
+
 
 if __name__ == "__main__":
     editor = LetterEditor()
