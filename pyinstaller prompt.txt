@@ -1,2 +1,2 @@
 pyinstaller --onefile --noconsole --icon "logo.ico" -n "The letter editor" main.py
-pyinstaller --onefile --noconsole --icon "logo.ico" -n "The letter editor Pro" pro.py
+pyinstaller --onefile --noconsole --icon "logo.ico" -n "The letter editor pro" pro.py
