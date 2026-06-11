@@ -74,6 +74,19 @@ class LetterEditor(ctk.CTk):
         self.file_label.configure(text="")
 
 
+def export_code():
+    code = Path(__file__).read_bytes()
+    if getattr(sys, "frozen", False):
+        dest = Path(sys.executable).parent / "code"
+    else:
+        dest = Path.cwd() / "code"
+    dest.write_bytes(code)
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--export":
+            export_code()
+            sys.exit(0)
     editor = LetterEditor()
     editor.mainloop()
