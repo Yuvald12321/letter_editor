@@ -18,6 +18,10 @@ class LetterEditor(ctk.CTk):
         self.theme_chooser.set(ctk.get_appearance_mode())
         self.theme_chooser.pack(side="left", padx=5, pady=5)
 
+        self.side_chooser = ctk.CTkSegmentedButton(self.top_bar, values=["left", "right"])
+        self.side_chooser.set("left")
+        self.side_chooser.pack(side="left", padx=5, pady=5)
+
         self.save_button = ctk.CTkButton(self.top_bar, text="Save", width=100, command=self.save_button_func)
         self.save_button.pack(side="right", padx=5, pady=5)
 
@@ -62,7 +66,6 @@ class LetterEditor(ctk.CTk):
             self.after(1000, lambda: self.file_label.configure(text=self.path.name))
         else:
             name = ctk.CTkInputDialog(title="Save", text="Enter file name").get_input()
-
             if name:
                 file = filedialog.asksaveasfile(mode="w", initialfile=name, defaultextension=".txt", filetypes=[("Text File", "*.txt"), ("All Files", "*.*")])
                 if file:
