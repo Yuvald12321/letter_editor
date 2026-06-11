@@ -62,7 +62,6 @@ class LetterEditor(ctk.CTk):
             self.after(1000, lambda: self.file_label.configure(text=self.path.name))
         else:
             name = ctk.CTkInputDialog(title="Save", text="Enter file name").get_input()
-
             if name:
                 file = filedialog.asksaveasfile(mode="w", initialfile=name, defaultextension=".txt", filetypes=[("Text File", "*.txt"), ("All Files", "*.*")])
                 if file:
