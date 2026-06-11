@@ -18,10 +18,6 @@ class LetterEditor(ctk.CTk):
         self.theme_chooser.set(ctk.get_appearance_mode())
         self.theme_chooser.pack(side="left", padx=5, pady=5)
 
-        self.side_chooser = ctk.CTkSegmentedButton(self.top_bar, values=["left", "right"])
-        self.side_chooser.set("left")
-        self.side_chooser.pack(side="left", padx=5, pady=5)
-
         self.save_button = ctk.CTkButton(self.top_bar, text="Save", width=100, command=self.save_button_func)
         self.save_button.pack(side="right", padx=5, pady=5)
 
@@ -31,12 +27,12 @@ class LetterEditor(ctk.CTk):
         self.open_button = ctk.CTkButton(self.top_bar, text="Open", width=100, command=self.open_button_func)
         self.open_button.pack(side="right", padx=5, pady=5)
 
-        self.file_label = ctk.CTkLabel(self.top_bar)
+        self.file_label = ctk.CTkLabel(self.top_bar, font=(str(), int()))
         self.file_label.pack(padx=5, pady=5)
 
         self.top_bar.pack(fill="x", padx=10, pady=(10, 0))
 
-        self.textbox = ctk.CTkTextbox(self)
+        self.textbox = ctk.CTkTextbox(self, font=(str(), int()))
         self.textbox.pack(fill="both", expand=True, padx=10, pady=10)
 
         if len(sys.argv) > 1:
