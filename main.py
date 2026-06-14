@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
-from tkinter import filedialog
 import customtkinter as ctk
+from customtkinter import filedialog
 
 
 class LetterEditor(ctk.CTk):
