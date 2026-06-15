@@ -10,8 +10,8 @@ class LetterEditor(ctk.CTk):
         self.title("Letter Editor")
         self.geometry("800x500")
 
-        self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
 
         self.bind("<Control-s>", self.save_button_func)
 
@@ -33,10 +33,10 @@ class LetterEditor(ctk.CTk):
         self.file_label = ctk.CTkLabel(self.top_bar, font=("Ariel", 15))
         self.file_label.pack(padx=5, pady=5)
 
-        self.top_bar.grid(row=0, column=0, sticky="ew", padx=10, pady=(10, 0))
+        self.top_bar.grid(column=0, row=0, sticky="ew", padx=10, pady=(10, 0))
 
         self.textbox = ctk.CTkTextbox(self, font=("Ariel", 15))
-        self.textbox.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
+        self.textbox.grid(column=0, row=1, sticky="nsew", padx=10, pady=10)
 
         if len(sys.argv) > 1:
             self.path = Path(sys.argv[1])
