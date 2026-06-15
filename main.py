@@ -51,13 +51,13 @@ class LetterEditor(ctk.CTk):
         path = filedialog.askopenfilename(filetypes=[("Letter File", "*.txt"), ("All Files", "*.*")])
         if path:
             self.path = Path(path)
-            self.textbox.delete("1.0", "end")
+            self.textbox.delete("1.0", "end-1c")
             self.textbox.insert("1.0", self.path.read_text())
             self.file_label.configure(text=self.path.name)
 
     def save_button_func(self, event=None):
         if self.path:
-            self.path.write_text(self.textbox.get("1.0", "end"))
+            self.path.write_text(self.textbox.get("1.0", "end-1c"))
             self.file_label.configure(text=self.path.name + " ✔")
             self.after(1000, lambda: self.file_label.configure(text=self.path.name))
         else:
@@ -69,7 +69,7 @@ class LetterEditor(ctk.CTk):
                     file.close()
 
     def close_button_func(self):
-        self.textbox.delete("1.0", "end")
+        self.textbox.delete("1.0", "end-1c")
         self.path = None
         self.file_label.configure(text="")
 
