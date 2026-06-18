@@ -24,7 +24,7 @@ class LetterEditor(ctk.CTk):
         self.save_button = ctk.CTkButton(self.top_bar, text="Save", width=100, command=self.save_button_func)
         self.save_button.pack(side="right", padx=5, pady=5)
 
-        self.close_button = ctk.CTkButton(self.top_bar, text="Close", width=100, command=self.close_button_func)
+        self.close_button = ctk.CTkButton(self.top_bar, text="Close file", width=100, command=self.close_button_func)
         self.close_button.pack(side="right", padx=5, pady=5)
 
         self.open_button = ctk.CTkButton(self.top_bar, text="Open", width=100, command=self.open_button_func)
