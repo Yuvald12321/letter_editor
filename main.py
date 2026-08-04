@@ -30,7 +30,7 @@ class LetterEditor(ctk.CTk):
         self.open_button = ctk.CTkButton(self.top_bar, text="Open", width=100, command=self.open_button_func)
         self.open_button.pack(side="right", padx=5, pady=5)
 
-        self.file_label = ctk.CTkLabel(self.top_bar, font=("Ariel", 15))
+        self.file_label = ctk.CTkLabel(self.top_bar, font=("Arial", 15))
         self.file_label.pack(padx=5, pady=5)
 
         self.top_bar.grid(column=0, row=0, sticky="ew", padx=10, pady=(10, 0))
