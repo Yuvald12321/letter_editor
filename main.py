@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 import customtkinter as ctk
 from customtkinter import filedialog
+from customtkinter_code_editor import CTkCodeEditor
 
 
 class LetterEditor(ctk.CTk):
@@ -35,13 +36,13 @@ class LetterEditor(ctk.CTk):
 
         self.top_bar.grid(column=0, row=0, sticky="ew", padx=10, pady=(10, 0))
 
-        self.textbox = ctk.CTkTextbox(self, font=("Ariel", 15))
+        self.textbox = CTkCodeEditor(self, font=("Ariel", 15), language="text")
         self.textbox.grid(column=0, row=1, sticky="nsew", padx=10, pady=10)
 
         if len(sys.argv) > 1:
             self.path = Path(sys.argv[1])
             if self.path and self.path.exists():
-                self.textbox.insert("1.0", self.path.read_text())
+                self.textbox.insert("1.0", self.path.read_text(encoding="utf-8"))
                 self.file_label.configure(text=self.path.name)
             else:
                 self.path = None
@@ -55,12 +56,12 @@ class LetterEditor(ctk.CTk):
         if path:
             self.path = Path(path)
             self.textbox.delete("1.0", "end-1c")
-            self.textbox.insert("1.0", self.path.read_text())
+            self.textbox.insert("1.0", self.path.read_text(encoding="utf-8"))
             self.file_label.configure(text=self.path.name)
 
     def save_button_func(self, event=None):
         if self.path:
-            self.path.write_text(self.textbox.get("1.0", "end-1c"))
+            self.path.write_text(self.textbox.get("1.0", "end-1c"), encoding="utf-8")
             self.file_label.configure(text=self.path.name + " ✔")
             self.after(1000, lambda: self.file_label.configure(text=self.path.name))
         else:
@@ -68,7 +69,7 @@ class LetterEditor(ctk.CTk):
             if name:
                 file = filedialog.asksaveasfile(mode="w", initialfile=name, defaultextension=".txt", filetypes=[("Letter File", "*.txt"), ("All Files", "*.*")])
                 if file:
-                    file.write(self.textbox.get("1.0", "end"))
+                    file.write(self.textbox.get("1.0", "end"), encoding="utf-8")
                     file.close()
 
     def close_button_func(self):
