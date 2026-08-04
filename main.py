@@ -1,8 +1,7 @@
 import sys
 from pathlib import Path
 import customtkinter as ctk
-from customtkinter import filedialog
-from customtkinter_code_editor import CTkCodeEditor
+from customtkinter import filedialog, CTkTextbox
 
 
 class LetterEditor(ctk.CTk):
@@ -36,7 +35,7 @@ class LetterEditor(ctk.CTk):
 
         self.top_bar.grid(column=0, row=0, sticky="ew", padx=10, pady=(10, 0))
 
-        self.textbox = CTkCodeEditor(self, font=("Ariel", 15), language="text")
+        self.textbox = CTkTextbox(self, font=("Ariel", 15))
         self.textbox.grid(column=0, row=1, sticky="nsew", padx=10, pady=10)
 
         if len(sys.argv) > 1:
