@@ -66,10 +66,10 @@ class LetterEditor(ctk.CTk):
         else:
             name = ctk.CTkInputDialog(title="Save", text="Enter file name").get_input()
             if name:
-                file = filedialog.asksaveasfile(mode="w", initialfile=name, defaultextension=".txt", filetypes=[("Letter File", "*.txt"), ("All Files", "*.*")])
+                file = filedialog.asksaveasfilename(initialfile=name, defaultextension=".txt", filetypes=[("Letter File", "*.txt"), ("All Files", "*.*")])
                 if file:
-                    file.write(self.textbox.get("1.0", "end"), encoding="utf-8")
-                    file.close()
+                    file = Path(file)
+                    file.write_text(self.textbox.get("1.0", "end"), encoding="utf-8")
 
     def close_button_func(self):
         self.textbox.delete("1.0", "end-1c")
