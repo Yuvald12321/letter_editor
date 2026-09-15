@@ -35,7 +35,7 @@ class LetterEditor(ctk.CTk):
 
         self.top_bar.grid(column=0, row=0, sticky="ew", padx=10, pady=(10, 0))
 
-        self.textbox = CTkTextbox(self, font=("Ariel", 15))
+        self.textbox = CTkTextbox(self, font=("Arial", 15))
         self.textbox.grid(column=0, row=1, sticky="nsew", padx=10, pady=10)
 
         if len(sys.argv) > 1:
